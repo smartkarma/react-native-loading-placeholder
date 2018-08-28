@@ -107,23 +107,16 @@ export default class PlaceholderContainer extends Component {
   }
 
   _triggerAnimation = (): void => {
-    const { duration, delay } = this.props;
-    const { startPosition, stopPosition } = this.state;
-    Animated.loop(Animated.sequence([
+    const { duration } = this.props;
+    const { stopPosition } = this.state;
+    Animated.loop(
       Animated.timing(this.position, {
         toValue: stopPosition || screenWidth,
         duration: duration,
         useNativeDriver: true,
-        isInteraction: false
-      }),
-      Animated.timing(this.position, {
-        toValue: startPosition || 0,
-        duration: 0,
-        delay: delay || 0,
-        useNativeDriver: true,
-        isInteraction: false
+        isInteraction: false,
       })
-    ])).start();
+    ).start();
   };
 
   _startAndRepeat = (): void => {
